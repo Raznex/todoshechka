@@ -1,0 +1,35 @@
+.header {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 62px 74px 78px;
+  background: #EBEDF2;
+  align-items: center;
+  position: relative;
+
+  &__title {
+    color: #252727;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__search {
+    border-radius: 20px;
+    background: #FFF;
+    width: 450px;
+    padding: 15px 15px 15px 36px;
+  }
+
+  &__lope {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 77px;
+    right: 495px;
+    cursor: pointer;
+    user-select: none;
+  }
+}
