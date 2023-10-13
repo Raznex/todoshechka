@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { IRegister } from '../../common/assets/constants/interface';
 import { OpenPage, PasswordEye, PasswordEyeOpen } from '../../common/assets/icon/moduleIcon';
@@ -11,6 +12,7 @@ import '../../layout/Style/Input/_Input.scss';
 const Register = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isVisibleRep, setIsVisibleRep] = useState(true);
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -20,9 +22,10 @@ const Register = () => {
   const onSubmit = (data: IRegister) => {
     const { passwordRegister, passwordRepeat } = data;
     if (passwordRegister === passwordRepeat) {
-      console.log(1);
+      console.log(data);
+      navigate('/login', { replace: true });
     } else {
-      console.log(2);
+      alert('пароли не совпадают');
     }
   };
 
@@ -139,7 +142,7 @@ const Register = () => {
             </div>
           </div>
           <button type="submit" className="register__button">Зарегистрироваться</button>
-          <a href="/" className="register__pass">Уже зарегистрированы? Войти</a>
+          <a href="/login" className="register__pass">Уже зарегистрированы? Войти</a>
         </form>
       </div>
       <OpenPage className="register__image" />

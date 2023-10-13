@@ -1,0 +1,52 @@
+.projects {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  width: 570px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #F4F6F7;
+  padding: 20px 32px;
+  margin-bottom: 12px;
+
+  &__image {
+    border-radius: 50%;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    margin-right: 18px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  &__name {
+    color: #26282C;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
+  &__task {
+    color: #95989C;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
+  }
+
+  &__date {
+    color: #9A9DA0;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
+    margin-left: 200px;
+  }
+}

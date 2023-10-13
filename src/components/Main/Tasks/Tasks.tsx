@@ -1,25 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import './_Task.scss';
+import './_Tasks.scss';
 import { Arrow } from '../../../common/assets/icon/moduleIcon';
+import Task from './Task/Task';
+import TaskBox from './TaskBox/TaskBox';
+import { IDashboardTask } from '../../../common/assets/constants/interface';
+
+import { useNavigate } from 'react-router-dom';
 
 
-const Task = () => {
-  const cs = 1;
+const Tasks = () => {
+  const [thisTask, setThisTask] = useState<IDashboardTask | null>(null);
+  const navigate = useNavigate();
+  const handleTaskClick = (taskData: IDashboardTask) => {
+    setThisTask(taskData);
+  };
+  const tasksBack = [
+    {
+      name: 'Сделать задачу',
+      priority: 'низкий',
+      description: 'сделать многа сделать тута',
+      dateStart: '22 окт',
+      dateEnd: '22 окт',
+    },
+    {
+      name: 'Сделать задачу дважды за день и еще разок на сдачу',
+      priority: 'средний',
+      description: 'сделать многа сделать тута',
+      dateStart: '22 окт',
+      dateEnd: '22 окт',
+    },
+  ];
+
   return (
     <div className="task">
       <div className="task__left">
         <h2 className="task__chapter">Backlog</h2>
         <div className="task__container">
-          <article className="task__card">
-            <p className="task__title">Сделать описание сервиса</p>
-            <div className="task__worker">
-              <img src="#" alt="Photos" className="task__photo" />
-            </div>
-            <p className="task__priority">низкий</p>
-            <p className="task__deadlines">23 окт - 29 окт</p>
-            <Arrow className="task__arrow" />
-          </article>
+          { tasksBack.map((task, id) => (
+            <Task
+              key={ id }
+              task={ task }
+              isActive={ thisTask?.name === task.name }
+              onTaskClick={ handleTaskClick }
+            />
+          )) }
         </div>
         <h2 className="task__chapter">To do</h2>
         <div className="task__container">
@@ -57,42 +82,14 @@ const Task = () => {
             <Arrow className="task__arrow" />
           </article>
         </div>
-        <button type="button" className="task__add-card">+ Создать задачу</button>
+        <button type="button" className="task__add-card" onClick={ (() => navigate('/newtask', { replace: true })) }>+ Создать задачу</button>
       </div>
       <div className="task__right">
         <div>
           <h3 className="task__details">Детали задачи</h3>
-          <p className="task__text">Разнообразный и богатый опыт говорит нам, что
-            высокое качество позиционных исследований однозначно фиксирует.
-          </p>
-          <div className="task__box">
-            <div className="task__string">
-              <p className="task__pos1">Название</p>
-              <p className="task__pos2">Сделать описание сервиса</p>
-            </div>
-            <div className="task__string">
-              <p className="task__pos1">Статус</p>
-              <p className="task__pos2">Backlog</p>
-            </div>
-            <div className="task__string">
-              <p className="task__pos1">Приоритет</p>
-              <p className="task__priority">низкий</p>
-            </div>
-            <div className="task__string">
-              <p className="task__pos1">Название</p>
-              <div className="task__worker">
-                <img src="#" alt="Photos" className="task__photo" />
-              </div>
-            </div>
-            <div className="task__string">
-              <p className="task__pos1">Дата начала</p>
-              <p className="task__pos2">20.10.2020</p>
-            </div>
-            <div className="task__string">
-              <p className="task__pos1">Дата окончания</p>
-              <p className="task__pos2">20.10.2020</p>
-            </div>
-          </div>
+          { thisTask !== null
+            ? <TaskBox task={ thisTask } />
+            : '' }
         </div>
         <button type="button" className="task__add-card">Редактировать задачу</button>
       </div>
@@ -100,4 +97,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default Tasks;

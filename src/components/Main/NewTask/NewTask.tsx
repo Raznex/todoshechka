@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import './_NewTask.scss';
-import { BxsUpArrow, Cross } from '../../../common/assets/icon/moduleIcon';
+import { Cross } from '../../../common/assets/icon/moduleIcon';
 
 import { useForm } from 'react-hook-form';
 

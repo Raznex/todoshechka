@@ -8,12 +8,20 @@
   align-items: center;
   position: relative;
 
+  &_hidden {
+    display: none;
+  }
+
   &__title {
     color: #252727;
     font-size: 32px;
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
+
+    &_hidden {
+      display: none;
+    }
   }
 
   &__search {

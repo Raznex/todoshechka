@@ -103,6 +103,13 @@
         "ignoreTypeImports": true
       }
     ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {"devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false}
+    ],
+
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
     "import/order": [
       "warn",

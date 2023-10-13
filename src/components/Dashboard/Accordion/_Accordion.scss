@@ -1,0 +1,115 @@
+.accordion {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 362px;
+  border-radius: 10px;
+  background: #F4F6F7;
+  padding: 22px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 12px;
+
+  &_open {
+    background: #252727;
+  }
+
+  &__title {
+    color: #26282C;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    margin-bottom: 16px;
+
+    &_open {
+      color: white;
+    }
+  }
+
+  &__priority {
+    width: 50px;
+    color: #95989C;
+    font-family: Inter;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
+    padding: 4px;
+
+    &_n {
+      background: #FFD6BF;
+    }
+
+    &_s {
+      background: #F8DE9B;
+    }
+
+    &_v {
+      background: #FFB58B;
+    }
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    order: 2;
+  }
+
+  &__date {
+    color: black;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
+    margin-left: 20px;
+
+    &_open {
+      color: white;
+    }
+  }
+
+  &__description {
+    color: #888989;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    min-height: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, min-height 0.3s ease;
+
+    &_open {
+      order: 1;
+      max-height: 150px;
+      min-height: 100px;
+    }
+  }
+
+  &__expand {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 22px;
+    right: 32px;
+    cursor: pointer;
+    rotate: 90deg;
+    transition: transform 0.4s ease, color 0.3s ease;
+
+    &_open {
+      transform: rotate(-90deg);
+    }
+
+    &_hidden {
+      display: none;
+    }
+  }
+}

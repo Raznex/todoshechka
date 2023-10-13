@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import './_Login.scss';
 import '../../layout/Style/Input/_Input.scss';
-import { ILogin, INewTask } from '../../common/assets/constants/interface';
+import { ILogin } from '../../common/assets/constants/interface';
 import { OpenPage, PasswordEye, PasswordEyeOpen } from '../../common/assets/icon/moduleIcon';
 
 
 const Login = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -18,6 +20,7 @@ const Login = () => {
 
   const onSubmit = (data: ILogin) => {
     console.log({ ...data });
+    navigate('/dashboard', { replace: true });
   };
 
   return (
@@ -78,7 +81,7 @@ const Login = () => {
           </div>
           <a href="/" className="login__pass">Забыли пароль?</a>
           <button type="submit" className="login__button">Войти</button>
-          <a href="/" className="login__button login__button_register">Зарегистрироваться</a>
+          <a href="/register" className="login__button login__button_register">Зарегистрироваться</a>
         </form>
       </div>
       <OpenPage className="login__image" />

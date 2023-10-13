@@ -1,0 +1,130 @@
+.newproject {
+  font-family: Inter, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 40px 74px 90px;
+
+  &__title {
+    color: #252727;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    margin-top: 28px;
+
+    &_up {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    &_down {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 20px 30px;
+      margin-bottom: 100px;
+      width: 100%;
+    }
+  }
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+
+    &_m {
+      width: calc(50% - 15px);
+    }
+  }
+
+  &__input {
+    width: 100%;
+    color: black;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(38, 40, 44, 0.20);
+    background: #F4F6F7;
+    padding: 14px 12px;
+    margin-top: 8px;
+    position: relative;
+
+    &:focus {
+      border: 1px solid #777777;
+    }
+
+    &_l {
+      width: 100%;
+    }
+
+    &_m {
+      width: 50%;
+    }
+
+    &_select {
+      appearance: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  &__arrow {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 40px;
+    right: 15px;
+    z-index: 2;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  &__span {
+    width: 100%;
+    margin: 3px 0 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    color: #FF5631;
+  }
+
+  &__star {
+    color: #95989C;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: -20px;
+  }
+
+  &__button {
+    width: 200px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #26282C;
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+
+    &:active {
+      background-color: #89B8FA;
+    }
+  }
+}

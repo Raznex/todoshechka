@@ -1,4 +1,5 @@
 export { default as Arrow } from "./Arrow";
+export { default as ArrowWhite } from "./ArrowWhite";
 export { default as BxsUpArrow } from "./BxsUpArrow";
 export { default as Cross } from "./Cross";
 export { default as Lope } from "./Lope";

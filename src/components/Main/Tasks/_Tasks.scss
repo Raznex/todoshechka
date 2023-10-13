@@ -6,7 +6,7 @@
   height: 100%;
 
   &__left {
-    width: 100%;
+    width: 681px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -39,19 +39,19 @@
     border-radius: 10px;
     background: #F4F6F7;
     cursor: pointer;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out 0.1s;
+    margin-left: 0;
+    transition: margin-left 0.2s ease-in-out 0.1s;
     //box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20), 0px 0px 2px 0px rgba(0, 0, 0, 0.08);
     &_active {
       background: #252727;
+      margin-left: 10px;
     }
 
     &:hover {
-      opacity: 0.75;
+      margin-left: 10px;
     }
     &_active:hover {
-      opacity: 1;
-      cursor: default;
+      margin-left: 10px;
     }
   }
 
@@ -61,6 +61,7 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    text-align: left;
     line-height: 16px;
     margin: 0 20px;
 
@@ -81,13 +82,31 @@
   }
 
   &__priority {
+    width: 50px;
     color: #95989C;
     font-size: 10px;
     padding: 2px;
     font-style: normal;
+    text-align: center;
     font-weight: 400;
     line-height: 12px;
     background: #FFF1CC;
+
+    &_n {
+      background: #FFD6BF;
+    }
+
+    &_s {
+      background: #F8DE9B;
+    }
+
+    &_v {
+      background: #FFB58B;
+    }
+
+    &_hidden {
+      display: none;
+    }
   }
 
   &__deadlines {
