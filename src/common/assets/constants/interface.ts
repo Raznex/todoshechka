@@ -23,3 +23,10 @@ export interface IRegister {
   passwordRegister: string;
   passwordRepeat: string;
 }
+
+export interface INewTask {
+  nameNewTask: string;
+  descriptionNewTask: string;
+  dateStartNewTask: string;
+  dateEndNewTask: string;
+}

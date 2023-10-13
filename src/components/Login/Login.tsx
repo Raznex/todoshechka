@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import './_Login.scss';
-import '../Input/_Input.scss';
-import { ILogin } from '../../common/assets/constants/interface';
+import '../../layout/Style/Input/_Input.scss';
+import { ILogin, INewTask } from '../../common/assets/constants/interface';
 import { OpenPage, PasswordEye, PasswordEyeOpen } from '../../common/assets/icon/moduleIcon';
 
 
@@ -16,8 +16,8 @@ const Login = () => {
     handleSubmit,
   } = useForm<ILogin>({ mode: 'onChange' });
 
-  const onSubmit = () => {
-    console.log('submited');
+  const onSubmit = (data: ILogin) => {
+    console.log({ ...data });
   };
 
   return (

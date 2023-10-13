@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { IRegister } from '../../common/assets/constants/interface';
 import { OpenPage, PasswordEye, PasswordEyeOpen } from '../../common/assets/icon/moduleIcon';
 import './_Register.scss';
-import '../Input/_Input.scss';
+import '../../layout/Style/Input/_Input.scss';
 
 
 const Register = () => {

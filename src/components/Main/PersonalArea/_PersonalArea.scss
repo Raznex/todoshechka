@@ -1,4 +1,129 @@
 .personal-area {
   font-family: Inter, Arial, sans-serif;
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px 270px 92px 69px;
+
+  &__title {
+    color: #252727;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 40px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__container {
+    display: flex;
+    gap: 64px;
+  }
+
+  &__photo {
+    color: transparent;
+    background-image: url("../../../common/assets/image/zondicons_photo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #d5d5d5;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-position: center;
+    object-fit: cover;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__label {
+    color: #26282C;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: default;
+  }
+
+  &__name{
+    width: 100%;
+    color: black;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(38, 40, 44, 0.20);
+    background: #F4F6F7;
+    padding: 14px 12px;
+    position: relative;
+    margin-top: 8px;
+
+    &_disabled {
+      color: #95989C;
+    }
+
+    &:focus {
+      border: 1px solid #777777;
+    }
+  }
+
+  &__change-photo {
+    width: 470px;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 20px 0 200px;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(38, 40, 44, 0.20);
+    background: #26282C;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out 0.1s;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  &__edit {
+    width: 200px;
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 14px;
+    border-radius: 5px;
+    background: #26282C;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out 0.1s;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &_active {
+      border-radius: 5px;
+      background: #89B8FA;
+    }
+  }
 }

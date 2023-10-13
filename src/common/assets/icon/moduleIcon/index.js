@@ -1,4 +1,6 @@
 export { default as Arrow } from "./Arrow";
+export { default as BxsUpArrow } from "./BxsUpArrow";
+export { default as Cross } from "./Cross";
 export { default as Lope } from "./Lope";
 export { default as OpenPage } from "./OpenPage";
 export { default as PasswordEye } from "./PasswordEye";
