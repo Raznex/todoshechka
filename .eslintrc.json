@@ -541,14 +541,5 @@
 
   },
   "overrides": [
-    //    {
-    //      "files": [
-    //        "src/*.tsx",
-    //        "src/api/index.ts"
-    //      ],
-    //      "rules": {
-    //        "import/no-default-export": "off"
-    //      }
-    //    }
   ]
 }
