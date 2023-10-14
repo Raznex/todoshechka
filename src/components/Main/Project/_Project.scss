@@ -22,6 +22,7 @@
     &_1 {
       width: 570px;
     }
+
     &_2 {
       width: 370px;
     }
@@ -48,6 +49,7 @@
     cursor: pointer;
     opacity: 1;
     transition: opacity 0.2s ease-in-out 0.1s;
+
     &_active {
       background: #252727;
     }
@@ -55,6 +57,7 @@
     &:hover {
       opacity: 0.75;
     }
+
     &_active:hover {
       opacity: 1;
       cursor: default;
@@ -151,17 +154,65 @@
   }
 
   &__add-card {
-    color: #89b8fa;
+    width: 200px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #26282C;
+    color: #FFF;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 20px;
-    padding: 14px 24px;
-    border: 1px dashed #89b8fa;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out 0.1s;
-    &:hover {
-      opacity: 0.6;
+
+
+    &:active {
+      background-color: #89B8FA;
+    }
+
+    &_hidden {
+      display: none;
+    }
+
+    &_s {
+      width: 150px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    color: black;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(38, 40, 44, 0.20);
+    background: #F4F6F7;
+    padding: 14px 12px;
+    margin-top: 8px;
+    position: relative;
+    margin-bottom: 20px;
+
+    &:focus {
+      border: 1px solid #777777;
     }
   }
 
@@ -188,6 +239,7 @@
     font-weight: 500;
     line-height: 20px;
   }
+
   &__text {
     color: #95989c;
     font-size: 12px;
@@ -258,6 +310,7 @@
     &:hover {
       opacity: 0.75;
     }
+
     &_active:hover {
       opacity: 1;
       cursor: default;
@@ -273,7 +326,7 @@
     margin-left: 20px;
   }
 
-  &__priorities  {
+  &__priorities {
     display: flex;
     flex-direction: row;
     margin-right: 14px;
@@ -290,7 +343,7 @@
     text-align: center;
   }
 
-  &__arrow  {
+  &__arrow {
     width: 16px;
     height: 16px;
     margin-left: 4px;

@@ -9,7 +9,7 @@ const baseURL = 'https://pre-hack-production.up.railway.app';
 export async function getUserTask(): Promise<ITask[]> {
   try {
     const res = await axios.get(`${baseURL}/secure/tasks`, {
-      headers: { authorization: `Bearer ${localStorage.getItem('jwt')}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` },
     });
     return res.data.tasks;
   } catch (err) {
@@ -33,7 +33,11 @@ export async function getUserProject(): Promise<IProject[]> {
 export const checkToken = async (jwt: string) => {
   try {
     const res = await axios.get(`${baseURL}/users/user`, {
-      headers: { authorization: `Bearer ${jwt}` },
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
     });
     return res.data;
   } catch (err) {

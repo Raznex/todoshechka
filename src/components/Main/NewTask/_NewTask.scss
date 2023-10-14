@@ -130,6 +130,10 @@
     margin-top: 8px;
     position: relative;
 
+    &_hidden {
+      display: none;
+    }
+
     &:focus {
       border: 1px solid #777777;
     }

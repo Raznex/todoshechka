@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './_Project.scss';
 import { Arrow } from '../../../common/assets/icon/moduleIcon';
 
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
+import { IAddONProject } from '../../../common/assets/constants/interface';
+
+import { Simulate } from 'react-dom/test-utils';
+
+import reset = Simulate.reset;
 
 
 const Project = () => {
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+  const handleClick = () => {
+    if (isEditing) {
+      setIsEditing(false);
+    } else {
+      setIsEditing(true);
+    }
+  };
+  const {
+    register,
+    handleSubmit,
+  } = useForm<IAddONProject>({ mode: 'onBlur' });
+
+  const onSubmit = (data: IAddONProject) => {
+    console.log({ ...data });
+    setIsEditing(false);
+  };
+
   return (
     <div className="project">
       <div className="project__left">
@@ -77,7 +102,7 @@ const Project = () => {
           <div>
             <div className="project__tasks">
               <h2 className="project__chapter">Задачи</h2>
-              <p className="project__review">посмотерть все</p>
+              <p className="project__review">посмотреть все</p>
             </div>
             <div className="project__container">
               <h3 className="project__to-do">Сделать описание сервиса</h3>
@@ -95,7 +120,22 @@ const Project = () => {
             </div>
           </div>
         </div>
-        <button type="button" className="project__add-card">Редактировать проект</button>
+        <form className="project__form" onSubmit={ handleSubmit(onSubmit) }>
+          <article className={ isEditing ? 'project__input-box' : 'project__input-box_hidden' }>
+            <label htmlFor="dateEndNewTask" className="project__label">Дата окончания</label>
+            <input
+              { ...register('addNewOnTask', {
+              }) }
+              type="email"
+              placeholder="email@email.com"
+              className="project__input"
+            />
+          </article>
+          <div className="project__buttons">
+            <button type="submit" className={ isEditing ? 'project__add-card' : 'project__add-card_hidden' }>Добавить участника</button>
+            <button type="button" className="project__add-card" onClick={ handleClick }>{ !isEditing ? 'Добавить участника' : 'Отмена' }</button>
+          </div>
+        </form>
       </div>
     </div>
   );

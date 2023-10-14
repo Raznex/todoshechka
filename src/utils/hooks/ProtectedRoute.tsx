@@ -14,7 +14,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ loggedIn, path, element
     if (!loggedIn) {
       navigate('/login');
     }
-  }, [loggedIn, navigate]);
+  }, [loggedIn]);
 
   if (loggedIn) {
     return <Route path={ path } element={ element } />;

@@ -44,6 +44,7 @@ const App = () => {
   useEffect(() => {
     cbCheckToken();
   }, []);
+
   const handleLogin = (data: ILogin) => {
     autorization(data)
       .then(() => {
@@ -96,13 +97,7 @@ const App = () => {
           />
           <Route
             path="/projects"
-            element={ (
-              <ProtectedRoute
-                path="/projects"
-                element={ <Project /> }
-                loggedIn={ loggedIn }
-              />
-            ) }
+            element={ <Project /> }
           />
           <Route
             path="/newproject"

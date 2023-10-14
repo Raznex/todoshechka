@@ -46,6 +46,10 @@ export interface INewTask {
   projectadd: string;
 }
 
+export interface IAddONProject {
+  addNewOnTask: string;
+}
+
 export interface IDashboardTask {
   name: string;
   priority: string;
