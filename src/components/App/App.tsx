@@ -71,7 +71,10 @@ const App = () => {
 
   return (
     <div className="page">
-      <Menu loggedIn={ loggedIn } />
+      <Menu
+        loggedIn={ loggedIn }
+        setLoggedIn={ setLoggedIn }
+      />
       <main className="content">
         <Header loggedIn={ loggedIn } />
         <Routes>

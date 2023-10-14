@@ -116,8 +116,18 @@ const Register = () => {
                   </span>
                 ) }
               </article>
-              <PasswordEye className={ isVisible ? 'register__password-eye' : 'register__password-eye_hidden' } onClick={ (() => { setIsVisible(false); }) } />
-              <PasswordEyeOpen className={ isVisible ? 'register__password-eye_hidden' : 'register__password-eye' } onClick={ (() => { setIsVisible(true); }) } />
+              <PasswordEye
+                className={ isVisible ? 'register__password-eye' : 'register__password-eye_hidden' }
+                onClick={ (() => {
+                  setIsVisible(false);
+                }) }
+              />
+              <PasswordEyeOpen
+                className={ isVisible ? 'register__password-eye_hidden' : 'register__password-eye' }
+                onClick={ (() => {
+                  setIsVisible(true);
+                }) }
+              />
             </div>
             <div className="register__input-password">
               <article className="input">
@@ -141,8 +151,18 @@ const Register = () => {
                   </span>
                 ) }
               </article>
-              <PasswordEye className={ isVisibleRep ? 'register__password-eye' : 'register__password-eye_hidden' } onClick={ (() => { setIsVisibleRep(false); }) } />
-              <PasswordEyeOpen className={ isVisibleRep ? 'register__password-eye_hidden' : 'register__password-eye' } onClick={ (() => { setIsVisibleRep(true); }) } />
+              <PasswordEye
+                className={ isVisibleRep ? 'register__password-eye' : 'register__password-eye_hidden' }
+                onClick={ (() => {
+                  setIsVisibleRep(false);
+                }) }
+              />
+              <PasswordEyeOpen
+                className={ isVisibleRep ? 'register__password-eye_hidden' : 'register__password-eye' }
+                onClick={ (() => {
+                  setIsVisibleRep(true);
+                }) }
+              />
             </div>
           </div>
           <button type="submit" className="register__button">Зарегистрироваться</button>

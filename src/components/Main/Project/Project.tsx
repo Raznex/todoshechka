@@ -6,16 +6,14 @@ import { Arrow } from '../../../common/assets/icon/moduleIcon';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { IAddONProject } from '../../../common/assets/constants/interface';
-
-import { Simulate } from 'react-dom/test-utils';
-
-import reset = Simulate.reset;
+import { IAddONProject, IProjectTasks } from '../../../common/assets/constants/interface';
+import ProjectCard from './ProjectCard/ProjectCard';
 
 
 const Project = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
+  const [thisProject, setThisProject] = useState<IProjectTasks | null>(null);
   const handleClick = () => {
     if (isEditing) {
       setIsEditing(false);
@@ -26,57 +24,67 @@ const Project = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    formState,
+    formState: { isSubmitSuccessful, errors },
   } = useForm<IAddONProject>({ mode: 'onBlur' });
+
+  React.useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ addNewOnTask: '' });
+    }
+  }, [formState, reset]);
 
   const onSubmit = (data: IAddONProject) => {
     console.log({ ...data });
     setIsEditing(false);
   };
 
+  const handleTProjectClick = (projectData: IProjectTasks) => {
+    setThisProject(projectData);
+  };
+
+  const projectTask = [
+    {
+      name: 'Банк ВТБ',
+      description: 'сделать многа сделать тута',
+      tasks: '20',
+      dateStart: '22 окт',
+      dateEnd: '22 окт',
+    },
+    {
+      name: 'Банк Сбер',
+      description: 'сделать многа сделать тута2',
+      tasks: '1',
+      dateStart: '22 окт',
+      dateEnd: '22 окт',
+    },
+  ];
+
   return (
     <div className="project">
       <div className="project__left">
         <div className="project__space_1">
           <h2 className="project__chapter">Проекты</h2>
-          <article className="project__card">
-            <div className="project__bank">
-              <img src="#" alt="Bank" className="project__photo" />
-              <div className="project__description">
-                <p className="project__title">Банк ВТБ</p>
-                <div className="project__task">
-                  <p className="project__quantity">20 задач&nbsp;</p>
-                </div>
-              </div>
-            </div>
-            <div className="project__right-side">
-              <img src="#" alt="Photos" className="project__img" />
-              <p className="project__deadlines">5 октября - 10 октября</p>
-            </div>
-          </article>
-          <article className="project__card project__card_active">
-            <div className="project__bank">
-              <img src="#" alt="Bank" className="project__photo" />
-              <div className="project__description">
-                <p className="project__title project__title_active">Ренессанс Банк</p>
-                <div className="project__task">
-                  <p className="project__quantity">9 задач&nbsp;</p>
-                  <p className="project__quantity">&#8226; 0 просрочено</p>
-                </div>
-              </div>
-            </div>
-            <div className="project__right-side">
-              <img src="#" alt="Photos" className="project__img" />
-              <p className="project__deadlines">5 октября - 10 октября</p>
-            </div>
-          </article>
+          { projectTask.map((project, id) => (
+            <ProjectCard
+              key={ id }
+              project={ project }
+              isActive={ project?.name === project.name }
+              onProjectClick={ handleTProjectClick }
+            />
+          )) }
         </div>
-        <button type="button" className="project__add-card" onClick={ (() => navigate('/newproject', { replace: true })) }>+ Создать проект</button>
+        <button type="button" className="project__add-card" onClick={ (() => navigate('/newproject', { replace: true })) }>+
+          Создать проект
+        </button>
       </div>
       <div className="project__right">
         <div className="project__space_2">
           <div>
             <h3 className="project__chapter">Проект Ренессанс Банк</h3>
-            <p className="project__text">Разнообразный и богатый опыт говорит нам, что высокое качество позиционных исследований однозначно фиксирует.
+            <p className="project__text">Разнообразный и богатый опыт говорит нам, что высокое качество позиционных
+              исследований однозначно фиксирует.
             </p>
             <div className="project__box">
               <div className="project__string">
@@ -120,20 +128,37 @@ const Project = () => {
             </div>
           </div>
         </div>
-        <form className="project__form" onSubmit={ handleSubmit(onSubmit) }>
+        <form noValidate className="project__form" onSubmit={ handleSubmit(onSubmit) }>
           <article className={ isEditing ? 'project__input-box' : 'project__input-box_hidden' }>
             <label htmlFor="dateEndNewTask" className="project__label">Дата окончания</label>
             <input
               { ...register('addNewOnTask', {
+                required: 'Введите email адрес',
+                pattern: {
+                  value: /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/i,
+                  message: 'Некорректный адрес электронной почты',
+                },
               }) }
               type="email"
               placeholder="email@email.com"
               className="project__input"
             />
+            { errors !== null && (
+              <span className="input__span">
+                { errors.addNewOnTask?.message }
+              </span>
+            ) }
           </article>
           <div className="project__buttons">
-            <button type="submit" className={ isEditing ? 'project__add-card' : 'project__add-card_hidden' }>Добавить участника</button>
-            <button type="button" className="project__add-card" onClick={ handleClick }>{ !isEditing ? 'Добавить участника' : 'Отмена' }</button>
+            <button type="submit" className={ isEditing ? 'project__add-card' : 'project__add-card_hidden' }>Добавить
+              участника
+            </button>
+            <button
+              type="button"
+              className="project__add-card"
+              onClick={ handleClick }
+            >{ !isEditing ? 'Добавить участника' : 'Отмена' }
+            </button>
           </div>
         </form>
       </div>

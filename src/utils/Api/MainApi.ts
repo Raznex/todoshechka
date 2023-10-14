@@ -36,7 +36,6 @@ export const checkToken = async (jwt: string) => {
       headers: {
         Authorization: `Bearer ${jwt}`,
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
     });
     return res.data;

@@ -7,6 +7,14 @@ export interface IInput {
   errors: any;
 }
 
+export interface IProjectTasks {
+  name: string;
+  description: string;
+  dateStart: string;
+  dateEnd: string;
+  tasks: string;
+}
+
 export interface ILogin {
   email: string;
   password: string;

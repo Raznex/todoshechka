@@ -8,13 +8,15 @@ import telegram from '../../common/assets/image/telegram.png';
 
 interface IMenuProps {
   loggedIn: boolean;
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Menu: React.FC<IMenuProps> = ({ loggedIn }) => {
+const Menu: React.FC<IMenuProps> = ({ loggedIn, setLoggedIn }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const onLogout = () => {
     localStorage.clear();
+    setLoggedIn(false);
     navigate('/login', { replace: true });
   };
   return (
