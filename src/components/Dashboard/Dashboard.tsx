@@ -57,7 +57,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard__task-box">
-        <h2 className="dashboard__title">Мои задачи</h2>
+        <h2 className="dashboard__title">Ваш текущие задачи</h2>
         <ul className="dashboard__accordion">
           { cards.map((card, id) => (
             <Accordion
@@ -70,7 +70,7 @@ const Dashboard = () => {
         </ul>
       </div>
       <div className="dashboard__project-box">
-        <h2 className="dashboard__title">Мои проекты</h2>
+        <h2 className="dashboard__title">Ваши текущие проекты проекты</h2>
         <ul className="dashboard__projects">
           { projects.map((project, id) => (
             <Projects

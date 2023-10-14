@@ -99,6 +99,10 @@ const Register = () => {
                   <input
                     { ...register('passwordRegister', {
                       required: 'Введите пароль',
+                      pattern: {
+                        value: /^.{8,}$/,
+                        message: 'Пароль должен содержать не менее 8 символов',
+                      },
                     }) }
                     type={ isVisible ? 'password' : 'text' }
                     id="passwordRegister"

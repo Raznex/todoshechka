@@ -20,11 +20,22 @@ export interface IRegister {
 }
 
 export interface ITask {
-  nameTask: string;
+  name: string;
+  description: string;
   priority: string;
-  descriptionTask: string;
-  dateStartTask: string;
-  dateEndTask: string;
+  status: string;
+  dataStart: string;
+  dataFinish: string;
+  projectId: string;
+}
+
+export interface IProject {
+  name: string;
+  description: string;
+  customer: string;
+  dataStart: string;
+  dataFinish: string;
+  projectId: string;
 }
 
 export interface INewTask {
@@ -32,6 +43,7 @@ export interface INewTask {
   descriptionNewTask: string;
   dateStartNewTask: string;
   dateEndNewTask: string;
+  projectadd: string;
 }
 
 export interface IDashboardTask {

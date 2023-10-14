@@ -20,6 +20,14 @@ const NewTask = () => {
     console.log({ ...data, value });
   };
 
+  const positionConst = [
+    { value: '', text: 'Не привязывается к проекту' },
+    { value: 'WORKER', text: 'ВТБ' },
+    { value: 'MID_MANAGER', text: 'СБЕР' },
+    { value: 'TOP_MANAGER', text: 'ЕЩЕ ПРОЕКТ' },
+    { value: 'OWNER', text: 'И ЕЩЕ' },
+  ];
+
   return (
     <form
       className="newtask"
@@ -118,6 +126,18 @@ const NewTask = () => {
               className="newtask__input"
               placeholder="Дата окончания"
             />
+          </article>
+          <article className="newtask__input-box newtask__input-box_m">
+            <label htmlFor="" className="newtask__label">Проект</label>
+            <select
+              { ...register('projectadd', {
+                required: 'Select one of the options',
+              }) }
+              id="employmentStatus-field"
+              className="newtask__input newtask__input_select"
+            >
+              { positionConst.map((item) => <option key={ item.value } value={ item.value }>{ item.text }</option>) }
+            </select>
           </article>
         </div>
         <p className="newtask__star"><span className="newtask__span">*</span> - поле, обязательное для заполнения</p>

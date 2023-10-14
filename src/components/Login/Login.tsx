@@ -7,9 +7,14 @@ import './_Login.scss';
 import '../../layout/Style/Input/_Input.scss';
 import { ILogin } from '../../common/assets/constants/interface';
 import { OpenPage, PasswordEye, PasswordEyeOpen } from '../../common/assets/icon/moduleIcon';
+import { autorization } from '../../utils/Api/MainApi';
 
 
-const Login = () => {
+interface ILoginProps {
+  onLogin: (data: ILogin) => void;
+}
+
+const Login: React.FC<ILoginProps> = ({ onLogin }) => {
   const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   const {
@@ -19,8 +24,7 @@ const Login = () => {
   } = useForm<ILogin>({ mode: 'onChange' });
 
   const onSubmit = (data: ILogin) => {
-    console.log({ ...data });
-    navigate('/dashboard', { replace: true });
+    onLogin(data);
   };
 
   return (
@@ -61,17 +65,21 @@ const Login = () => {
                   </label>
                   <input
                     { ...register('password', {
+                      pattern: {
+                        value: /^.{3,}$/,
+                        message: 'Пароль должен содержать не менее 8 символов',
+                      },
                       required: 'Введите пароль',
                     }) }
                     type={ isVisible ? 'password' : 'text' }
                     id="passwordLogin"
                     placeholder="Пароль"
-                    className={ errors.email ? 'input__input input__input_error' : 'input__input' }
+                    className={ errors.password ? 'input__input input__input_error' : 'input__input' }
                   />
                 </div>
                 { errors !== null && (
                   <span className="input__span">
-                    { errors.email?.message }
+                    { errors.password?.message }
                   </span>
                 ) }
               </article>
