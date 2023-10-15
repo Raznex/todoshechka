@@ -24,6 +24,12 @@ const Tasks: React.FC<ITaskProps> = ({ tasks, project, user }) => {
     setSelectedStatus(newStatus);
   };
 
+  const statusTasks = status;
+  const newStatus = [
+    { value: '', text: 'Сортировка не выбрана' },
+    ...statusTasks,
+  ];
+  console.log(newStatus);
   // Фильтрация задач по выбранному статусу
   const filteredTasks = selectedStatus
     ? tasks.filter((task) => task.statusHistories[task.statusHistories.length - 1].status === selectedStatus)
@@ -46,7 +52,7 @@ const Tasks: React.FC<ITaskProps> = ({ tasks, project, user }) => {
             value={ selectedStatus }
             onChange={ handleStatusChange }
           >
-            { status.map((item) => <option key={ item.value } value={ item.value }>{ item.text }</option>) }
+            { newStatus.map((item) => <option key={ item.value } value={ item.value }>{ item.text }</option>) }
           </select>
           <div className="task__space">
             <div className="task__container">

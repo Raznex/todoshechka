@@ -66,7 +66,7 @@ const Login: React.FC<ILoginProps> = ({ onLogin }) => {
                   <input
                     { ...register('password', {
                       pattern: {
-                        value: /^.{3,}$/,
+                        value: /^.{8,}$/,
                         message: 'Пароль должен содержать не менее 8 символов',
                       },
                       required: 'Введите пароль',
