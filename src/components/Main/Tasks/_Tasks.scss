@@ -24,11 +24,29 @@
     margin-bottom: 20px;
   }
 
+  &__space {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      background-color: #FFF;
+      &-thumb {
+        background-color: #D9D9D97F;
+        width: 10px;
+        border-radius: 3px;
+      }
+    }
+  }
+
   &__container {
     display: flex;
     flex-direction: column;
     gap: 12px;
     margin-bottom: 36px;
+    width: 590px;
   }
 
   &__card {
@@ -41,7 +59,6 @@
     cursor: pointer;
     margin-left: 0;
     transition: margin-left 0.2s ease-in-out 0.1s;
-    //box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.20), 0px 0px 2px 0px rgba(0, 0, 0, 0.08);
     &_active {
       background: #252727;
       margin-left: 10px;
@@ -56,7 +73,7 @@
   }
 
   &__title {
-    width: 260px;
+    width: 340px;
     color: #26282C;
     font-size: 16px;
     font-style: normal;
@@ -70,15 +87,12 @@
     }
   }
 
-  &__worker {
-    //width: 68px;
-  }
-
   &__photo {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
     margin-right: 16px;
+    font-size: 12px;
+    font-style: normal;
+    text-align: center;
+    font-weight: 400;
   }
 
   &__priority {
@@ -137,9 +151,14 @@
     border: 1px dashed #89B8FA;
     opacity: 1;
     transition: opacity 0.2s ease-in-out 0.1s;
+    margin-top: 20px;
 
     &:hover {
       opacity: 0.6;
+    }
+
+    &_hidden {
+      display: none;
     }
   }
 

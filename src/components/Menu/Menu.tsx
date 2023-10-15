@@ -4,14 +4,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './_Menu.scss';
 import { OpenPage } from '../../common/assets/icon/moduleIcon';
 import telegram from '../../common/assets/image/telegram.png';
+import { IUser } from '../../common/assets/constants/interface';
 
 
 interface IMenuProps {
   loggedIn: boolean;
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  user: IUser | null;
 }
 
-const Menu: React.FC<IMenuProps> = ({ loggedIn, setLoggedIn }) => {
+const Menu: React.FC<IMenuProps> = ({ loggedIn, setLoggedIn, user }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const onLogout = () => {
@@ -42,10 +44,9 @@ const Menu: React.FC<IMenuProps> = ({ loggedIn, setLoggedIn }) => {
         <button type="button" className={ `${!loggedIn ? 'menu__button-login' : 'menu__button-login_hidden'}` } onClick={ (() => navigate('/login', { replace: true })) }>Авторизоваться</button>
         <div className={ `menu__profile-box ${loggedIn ? '' : 'menu__profile-box_hidden'}` }>
           <button type="button" className="menu__profile" onClick={ (() => navigate('/profile', { replace: true })) }>
-            <img src="#" alt="profile" className="menu__photo" />
             <div className="menu__profile_container">
-              <p className="menu__name">Фамилия Имя</p>
-              <p className="menu__position">Front</p>
+              <p className="menu__name">{ user?.userName }</p>
+              <p className="menu__position">{ user?.roles[0].name }</p>
             </div>
           </button>
           <button type="button" className="menu__exit" onClick={ onLogout }>Выйти из аккаунта</button>

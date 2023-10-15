@@ -5,9 +5,18 @@ import './_NewProject.scss';
 import { useForm } from 'react-hook-form';
 
 import { INewProject } from '../../../common/assets/constants/interface';
+import { postNewProject } from '../../../utils/Api/MainApi';
+
+import { useNavigate } from 'react-router-dom';
 
 
-const NewProject = () => {
+interface INewProjectProps {
+  loggedIn: boolean;
+}
+
+
+const NewProject: React.FC<INewProjectProps> = ({ loggedIn }) => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,7 +24,8 @@ const NewProject = () => {
 
 
   const onSubmit = (data: INewProject) => {
-    console.log({ ...data });
+    postNewProject(data);
+    navigate('/projects');
   };
 
   return (
@@ -31,7 +41,7 @@ const NewProject = () => {
           <article className="newproject__input-box newproject__input-box_l">
             <label htmlFor="nameNewProject" className="newproject__label">Наименование<span className="newproject__span">*</span></label>
             <input
-              { ...register('nameNewProject', {
+              { ...register('name', {
                 required: 'Введите название проекта',
               }) }
               id="nameNewProject"
@@ -43,7 +53,7 @@ const NewProject = () => {
           <article className="newproject__input-box newproject__input-box_l">
             <label htmlFor="descriptionNewProject" className="newproject__label">Описание</label>
             <input
-              { ...register('descriptionNewProject', {
+              { ...register('description', {
               }) }
               id="descriptionNewProject"
               type="text"
@@ -56,7 +66,7 @@ const NewProject = () => {
           <article className="newproject__input-box newproject__input-box_m">
             <label htmlFor="dateStartNewProject" className="newproject__label">Дата начала</label>
             <input
-              { ...register('dateStartNewProject', {
+              { ...register('dataStart', {
               }) }
               id="dateStartNewProject"
               type="date"
@@ -67,7 +77,7 @@ const NewProject = () => {
           <article className="newproject__input-box newproject__input-box_m">
             <label htmlFor="dateEndNewProject" className="newproject__label">Дата окончания</label>
             <input
-              { ...register('dateEndNewProject', {
+              { ...register('dataFinish', {
               }) }
               id="dateEndNewProject"
               type="date"
@@ -76,20 +86,9 @@ const NewProject = () => {
             />
           </article>
           <article className="newproject__input-box newproject__input-box_m">
-            <label htmlFor="participantsNewProject" className="newproject__label">Участники</label>
-            <input
-              { ...register('participantsNewProject', {
-              }) }
-              id="participantsNewProject"
-              type="text"
-              className="newproject__input"
-              placeholder="Участники"
-            />
-          </article>
-          <article className="newproject__input-box newproject__input-box_m">
             <label htmlFor="clientNewProject" className="newproject__label">Клиент</label>
             <input
-              { ...register('clientNewProject', {
+              { ...register('customer', {
               }) }
               id="clientNewProject"
               type="text"

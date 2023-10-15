@@ -1,20 +1,3 @@
-export interface IInput {
-  id: string;
-  label: string;
-  span: string;
-  type: string;
-  placeholder: string;
-  errors: any;
-}
-
-export interface IProjectTasks {
-  name: string;
-  description: string;
-  dateStart: string;
-  dateEnd: string;
-  tasks: string;
-}
-
 export interface ILogin {
   email: string;
   password: string;
@@ -27,35 +10,76 @@ export interface IRegister {
   passwordRepeat: string;
 }
 
-export interface ITask {
+export interface IUser {
+  email: string;
+  password: string;
+  userId: number;
+  userName: string;
+  roles: IRoles[];
+}
+
+export interface IRoles {
+  roleId: number;
   name: string;
-  description: string;
-  priority: string;
-  status: string;
+}
+
+export interface INewProject {
+  customer: string;
+  name: string;
   dataStart: string;
   dataFinish: string;
-  projectId: string;
+  description: string;
 }
 
 export interface IProject {
-  name: string;
-  description: string;
   customer: string;
+  name: string;
+  projectId: number;
   dataStart: string;
   dataFinish: string;
-  projectId: string;
+  description: string;
+  users: IUser[];
+}
+
+interface IStatus {
+  status: string;
+  dateTimeChange: string;
+}
+
+export interface ITask {
+  taskId: number;
+  name: string;
+  description: string;
+  priority: string;
+  statusHistories: IStatus[];
+  dataStart: string;
+  dataFinish: string;
+  project: IProject;
+  user: IUser;
 }
 
 export interface INewTask {
-  nameNewTask: string;
-  descriptionNewTask: string;
-  dateStartNewTask: string;
-  dateEndNewTask: string;
-  projectadd: string;
+  name: string;
+  description: string;
+  priority: string;
+  dataStart: string;
+  dataFinish: string;
+  projectId: number;
+}
+
+export interface IEditTask {
+  name: string;
+  description: string;
+  priority: string;
+  dataStart: string;
+  dataFinish: string;
+  projectId: number;
+  status: string;
+  userEmail: string;
 }
 
 export interface IAddONProject {
-  addNewOnTask: string;
+  email: string;
 }
 
 export interface IDashboardTask {
@@ -71,13 +95,4 @@ export interface IDashboardProject {
   quantity: number;
   dateStart: string;
   dateEnd: string;
-}
-
-export interface INewProject {
-  nameNewProject: string;
-  descriptionNewProject: string;
-  dateStartNewProject: string;
-  dateEndNewProject: string;
-  participantsNewProject: string;
-  clientNewProject: string;
 }

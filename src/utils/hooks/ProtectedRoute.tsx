@@ -1,26 +1,11 @@
-import React, { useEffect } from 'react';
-import { Route, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
 
-interface ProtectedRouteProps {
+interface IProps {
   loggedIn: boolean;
-  path: string;
-  element: React.ReactElement; // Компонент для отображения, если авторизован
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ loggedIn, path, element }) => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!loggedIn) {
-      navigate('/login');
-    }
-  }, [loggedIn]);
-
-  if (loggedIn) {
-    return <Route path={ path } element={ element } />;
-  }
-  navigate('/login');
-  return null;
-};
+const ProtectedRoute: React.FC<IProps> = ({ loggedIn }) => (loggedIn ? <Outlet /> : <Navigate to="/login" />);
 
 export default ProtectedRoute;

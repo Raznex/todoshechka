@@ -1,34 +1,32 @@
 import React from 'react';
 
-import { IProjectTasks } from '../../../../common/assets/constants/interface';
+import { IProject } from '../../../../common/assets/constants/interface';
 
 
 interface IProjectCardProps {
-  project: IProjectTasks;
+  project: IProject;
   isActive: boolean;
-  onProjectClick: (projectData: IProjectTasks) => void;
+  onProjectClick: (projectData: IProject) => void;
 }
 
 const ProjectCard: React.FC<IProjectCardProps> = ({ project, isActive, onProjectClick }) => {
-  const onClick = (project: IProjectTasks) => {
+  const onClick = (project: IProject) => {
     onProjectClick(project);
   };
   return (
-    <article className="project__card">
+    <button type="button" className={ `project__card ${isActive ? 'project__card_active' : ''}` } onClick={ () => onClick(project) }>
       <div className="project__bank">
-        <img src="#" alt="Bank" className="project__photo" />
         <div className="project__description">
-          <p className="project__title">{ project.name }</p>
+          <p className={ `project__title ${isActive ? 'project__title_active' : ''}` }>{ project.name }</p>
           <div className="project__task">
-            <p className="project__quantity">{ project.tasks } задач&nbsp;</p>
+            { /* <p className="project__quantity">{ project.tasks } задач&nbsp;</p> */ }
           </div>
         </div>
       </div>
       <div className="project__right-side">
-        <img src="#" alt="Photos" className="project__img" />
-        <p className="project__deadlines">{ project.dateStart } - { project.dateEnd }</p>
+        <p className="project__deadlines">{ project.dataStart } - { project.dataFinish }</p>
       </div>
-    </article>
+    </button>
   );
 };
 

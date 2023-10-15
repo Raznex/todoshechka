@@ -182,6 +182,12 @@
     margin-bottom: -20px;
   }
 
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
   &__button {
     width: 200px;
     height: 48px;
@@ -196,6 +202,14 @@
 
     &:active {
     background-color: #89B8FA;
+    }
+
+    &_edit {
+      background-color: #89B8FA;
+    }
+
+    &_delete {
+      background-color: #DD565A;
     }
   }
 }

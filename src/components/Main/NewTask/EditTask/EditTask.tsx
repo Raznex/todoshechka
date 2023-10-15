@@ -1,27 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import '../_NewTask.scss';
+import { Cross } from '../../../../common/assets/icon/moduleIcon';
+
 import { useForm } from 'react-hook-form';
+
+import { IEditTask, IProject, ITask, IUser } from '../../../../common/assets/constants/interface';
+
 import { useLocation } from 'react-router-dom';
 
-import { Cross } from '../../../common/assets/icon/moduleIcon';
-import { INewTask, IProject } from '../../../common/assets/constants/interface';
-import { postNewTask } from '../../../utils/Api/MainApi';
+import { deleteTask, putTask } from '../../../../utils/Api/MainApi';
+import { status } from '../../../../common/assets/constants/constants';
 
 
-interface INewTaskProps {
+interface IEditTaskProps {
+  thisTask: ITask | null;
   project: IProject[];
+  user: IUser | null;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NewTask: React.FC<INewTaskProps> = ({ project }) => {
+const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEditing }) => {
   const location = useLocation();
   const {
     register,
     handleSubmit,
-  } = useForm<INewTask>({ mode: 'onBlur' });
+  } = useForm<IEditTask>({ mode: 'onBlur' });
 
-  const [priority, setPriority] = useState('');
+  const [priority, setPriority] = useState('LOW');
 
-  const onSubmit = (data: INewTask) => {
-    postNewTask({ ...data, priority });
+  useEffect(() => {
+    if (thisTask) {
+      setPriority(thisTask?.priority);
+    }
+  }, [setIsEditing]);
+
+  console.log(thisTask);
+  const onSubmit = (data: IEditTask) => {
+    if (thisTask) {
+      putTask({ ...data, priority }, thisTask?.taskId);
+      setIsEditing(false);
+    }
+  };
+
+  const onDeleteTask = () => {
+    if (thisTask) {
+      deleteTask(thisTask?.taskId);
+      setIsEditing(false);
+    }
   };
 
   const positionConst = project.map((project) => ({
@@ -32,7 +58,6 @@ const NewTask: React.FC<INewTaskProps> = ({ project }) => {
     projectId: 0,
     name: 'Без привязки к проекту',
   });
-  console.log(positionConst);
 
   return (
     <form
@@ -96,6 +121,7 @@ const NewTask: React.FC<INewTaskProps> = ({ project }) => {
               type="text"
               className="newtask__input"
               placeholder="Наименование задачи"
+              value={ thisTask?.name }
             />
           </article>
           <article className="newtask__input-box newtask__input-box_l">
@@ -107,6 +133,7 @@ const NewTask: React.FC<INewTaskProps> = ({ project }) => {
               type="text"
               className="newtask__input"
               placeholder="Описание задачи"
+              value={ thisTask?.description }
             />
           </article>
         </div>
@@ -145,12 +172,40 @@ const NewTask: React.FC<INewTaskProps> = ({ project }) => {
               { positionConst.map((item) => <option key={ item.projectId } value={ item.projectId }>{ item.name }</option>) }
             </select>
           </article>
+          <article className="newtask__input-box newtask__input-box_m">
+            <label htmlFor="" className="newtask__label">Проект</label>
+            <select
+              { ...register('status') }
+              id="employmentStatus-field"
+              className="newtask__input newtask__input_select"
+            >
+              { status.map((item) => <option key={ item.value } value={ item.value }>{ item.text }</option>) }
+            </select>
+          </article>
+          <article className="newtask__input-box newtask__input-box_m">
+            <label htmlFor="addToProjectEmail" className="newtask__label">Добавьте email сотрудника</label>
+            <input
+              { ...register('userEmail', {
+                pattern: {
+                  value: /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/i,
+                  message: 'Некорректный адрес электронной почты',
+                },
+              }) }
+              id="addToProjectEmail"
+              type="email"
+              className="newtask__input"
+              placeholder="email@email.com"
+            />
+          </article>
         </div>
-        <p className="newtask__star"><span className="newtask__span">*</span> - поле, обязательное для заполнения</p>
-        <button type="submit" className="newtask__button">Создать</button>
+        <div className="newtask__buttons">
+          <button type="submit" className="newtask__button newtask__button_edit">Редактировать</button>
+          <button type="button" className="newtask__button" onClick={ (() => { setIsEditing(false); }) }>Назад</button>
+          <button type="button" className="newtask__button newtask__button_delete" onClick={ onDeleteTask }>Удалить</button>
+        </div>
       </div>
     </form>
   );
 };
 
-export default NewTask;
+export default EditTask;

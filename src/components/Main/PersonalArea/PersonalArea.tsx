@@ -1,9 +1,15 @@
 import React from 'react';
 
 import './_PersonalArea.scss';
+import { IUser } from '../../../common/assets/constants/interface';
 
 
-const PersonalArea = () => (
+interface IProfileProps {
+  loggedIn: boolean;
+  user: IUser | null;
+}
+
+const PersonalArea: React.FC<IProfileProps> = ({ loggedIn, user }) => (
   <div className="personal-area">
     <h2 className="personal-area__title">Личные данные пользователя</h2>
     <form className="personal-area__form">
@@ -17,7 +23,7 @@ const PersonalArea = () => (
               id="nameProfile"
               type="text"
               className="personal-area__name personal-area__name_disabled"
-              value="My Name"
+              value={ user?.userName }
             />
           </div>
           <div className="personal-area__input">
@@ -27,7 +33,7 @@ const PersonalArea = () => (
               id="emailProfile"
               type="email"
               className="personal-area__name personal-area__name_disabled"
-              value="Email@email.com"
+              value={ user?.email }
             />
           </div>
           <button type="button" className="personal-area__change-photo">Изменить фото профиля</button>

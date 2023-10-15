@@ -14,21 +14,21 @@ import NewTask from '../Main/NewTask/NewTask';
 import Project from '../Main/Project/Project';
 import NewProject from '../Main/NewProject/NewProject';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { autorization, checkToken, getUserProject, getUserTask } from '../../utils/Api/MainApi';
-import { ILogin, IProject, ITask } from '../../common/assets/constants/interface';
-import ProtectedRoute from '../../utils/hooks/ProtectedRoute';
+import { autorization, checkToken, getUserInfo, getUserProject, getUserTask } from '../../utils/Api/MainApi';
+import { ILogin, IProject, ITask, IUser } from '../../common/assets/constants/interface';
+import EditTask from '../Main/NewTask/EditTask/EditTask';
 
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<IUser | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [projects, setProjects] = useState<IProject[]>([]);
-  console.log(loggedIn);
-  // console.log(tasks);
-  // console.log(projects);
   const navigate = useNavigate();
 
   const cbCheckToken = () => {
+    setIsLoading(true);
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       checkToken(jwt)
@@ -37,6 +37,9 @@ const App = () => {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   };
@@ -60,18 +63,20 @@ const App = () => {
       });
   };
 
-  // useEffect(() => {
-  //   Promise.all([getUserTask(), getUserProject()])
-  //     .then(([dataTask, dataProject]) => {
-  //       setTasks(dataTask);
-  //       setProjects(dataProject);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [window.onload]);
-
+  useEffect(() => {
+    Promise.all([getUserTask(), getUserProject(), getUserInfo()])
+      .then(([res, projectRes, userRes]) => {
+        setTasks(res);
+        setProjects(projectRes);
+        setUser(userRes);
+      })
+      .catch((err) => console.log(err));
+  }, [window.onload]);
+  console.log(tasks);
   return (
     <div className="page">
       <Menu
+        user={ user }
         loggedIn={ loggedIn }
         setLoggedIn={ setLoggedIn }
       />
@@ -81,49 +86,46 @@ const App = () => {
           <Route
             path="/tasks"
             element={ (
-              <ProtectedRoute
-                path="/tasks"
-                element={ <Tasks /> }
-                loggedIn={ loggedIn }
+              <Tasks
+                user={ user }
+                project={ projects }
+                tasks={ tasks }
               />
             ) }
           />
           <Route
             path="/newtask"
             element={ (
-              <ProtectedRoute
-                path="/newtask"
-                element={ <NewTask /> }
-                loggedIn={ loggedIn }
+              <NewTask
+                project={ projects }
               />
             ) }
           />
           <Route
             path="/projects"
-            element={ <Project /> }
+            element={ (
+              <Project
+                project={ projects }
+              />
+            ) }
           />
           <Route
             path="/newproject"
             element={ (
-              <ProtectedRoute
-                path="/newproject"
-                element={ <NewProject /> }
+              <NewProject
                 loggedIn={ loggedIn }
               />
             ) }
           />
           <Route
             path="/"
-            element={ (
-              <Dashboard />
-            ) }
+            element={ <Dashboard /> }
           />
           <Route
             path="/profile"
             element={ (
-              <ProtectedRoute
-                path="/profile"
-                element={ <PersonalArea /> }
+              <PersonalArea
+                user={ user }
                 loggedIn={ loggedIn }
               />
             ) }
@@ -138,9 +140,7 @@ const App = () => {
           />
           <Route
             path="/register"
-            element={ (
-              <Register />
-            ) }
+            element={ <Register /> }
           />
           <Route path="*" element={ <PageNotFound /> } />
         </Routes>
