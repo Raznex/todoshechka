@@ -15,6 +15,17 @@
     border-right: 1px solid rgba(217, 217, 217, 0.50);
   }
 
+  &__input-select {
+    width: 250px;
+    padding: 20px 20px 20px 0;
+    cursor: pointer;
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+
   &__chapter {
     color: #252727;
     font-size: 20px;

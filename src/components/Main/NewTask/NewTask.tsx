@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Cross } from '../../../common/assets/icon/moduleIcon';
 import { INewTask, IProject } from '../../../common/assets/constants/interface';
-import { postNewTask } from '../../../utils/Api/MainApi';
+import { getUserTask, postNewTask } from '../../../utils/Api/MainApi';
 
 
 interface INewTaskProps {
@@ -13,15 +13,17 @@ interface INewTaskProps {
 
 const NewTask: React.FC<INewTaskProps> = ({ project }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
   } = useForm<INewTask>({ mode: 'onBlur' });
 
-  const [priority, setPriority] = useState('');
+  const [priority, setPriority] = useState('LOW');
 
   const onSubmit = (data: INewTask) => {
     postNewTask({ ...data, priority });
+    navigate('/tasks');
   };
 
   const positionConst = project.map((project) => ({
@@ -40,7 +42,7 @@ const NewTask: React.FC<INewTaskProps> = ({ project }) => {
       onSubmit={ handleSubmit(onSubmit) }
     >
       <div className="newtask__checkboxs">
-        <h3 className="newtask__title">Создание задачи Редактирование задачи</h3>
+        <h3 className="newtask__title">Создание задачи</h3>
         <div className="newtask__radio-box">
           <p className="newtask__radio-text">Приоритет задачи</p>
           <div className="newtask__radio-btn">

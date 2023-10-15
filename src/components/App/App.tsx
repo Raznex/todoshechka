@@ -72,7 +72,7 @@ const App = () => {
       })
       .catch((err) => console.log(err));
   }, [window.onload]);
-  console.log(tasks);
+
   return (
     <div className="page">
       <Menu

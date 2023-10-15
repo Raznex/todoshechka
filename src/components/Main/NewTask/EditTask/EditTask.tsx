@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import '../_NewTask.scss';
 import { Cross } from '../../../../common/assets/icon/moduleIcon';
@@ -25,9 +25,35 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
   const {
     register,
     handleSubmit,
+    setValue,
   } = useForm<IEditTask>({ mode: 'onBlur' });
-
   const [priority, setPriority] = useState('LOW');
+
+  const [name, setName] = useState(thisTask?.name || '');
+  const [description, setDescription] = useState(thisTask?.description || '');
+  const [dataStart, setDataStart] = useState(thisTask?.dataStart || '');
+  const [dataFinish, setDataFinish] = useState(thisTask?.dataFinish || '');
+  const [projectId, setProjectId] = useState(thisTask?.project.projectId || '');
+  const [statusTask, setStatusTask] = useState(thisTask?.statusHistories[thisTask.statusHistories.length - 1].status || '');
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+  const handleDescruptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
+  };
+  const handleStatusChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setStatusTask(event.target.value);
+  };
+  const handleProjectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setProjectId(event.target.value);
+  };
+  const handleDataStartChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDataStart(event.target.value);
+  };
+  const handleDataFinishChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDataFinish(event.target.value);
+  };
 
   useEffect(() => {
     if (thisTask) {
@@ -35,7 +61,6 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
     }
   }, [setIsEditing]);
 
-  console.log(thisTask);
   const onSubmit = (data: IEditTask) => {
     if (thisTask) {
       putTask({ ...data, priority }, thisTask?.taskId);
@@ -65,7 +90,7 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
       onSubmit={ handleSubmit(onSubmit) }
     >
       <div className="newtask__checkboxs">
-        <h3 className="newtask__title">Создание задачи Редактирование задачи</h3>
+        <h3 className="newtask__title">Редактирование задачи</h3>
         <div className="newtask__radio-box">
           <p className="newtask__radio-text">Приоритет задачи</p>
           <div className="newtask__radio-btn">
@@ -121,7 +146,8 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
               type="text"
               className="newtask__input"
               placeholder="Наименование задачи"
-              value={ thisTask?.name }
+              value={ name || '' }
+              onChange={ handleNameChange }
             />
           </article>
           <article className="newtask__input-box newtask__input-box_l">
@@ -133,7 +159,8 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
               type="text"
               className="newtask__input"
               placeholder="Описание задачи"
-              value={ thisTask?.description }
+              value={ description || '' }
+              onChange={ handleDescruptionChange }
             />
           </article>
         </div>
@@ -147,6 +174,8 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
               type="date"
               className="newtask__input"
               placeholder="Дата начала"
+              value={ dataStart || '' }
+              onChange={ handleDataStartChange }
             />
           </article>
           <article className="newtask__input-box newtask__input-box_m">
@@ -158,6 +187,8 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
               type="date"
               className="newtask__input"
               placeholder="Дата окончания"
+              value={ dataFinish || '' }
+              onChange={ handleDataFinishChange }
             />
           </article>
           <article className="newtask__input-box newtask__input-box_m">
@@ -168,16 +199,20 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
               }) }
               id="employmentStatus-field"
               className="newtask__input newtask__input_select"
+              value={ projectId }
+              onChange={ handleProjectChange }
             >
               { positionConst.map((item) => <option key={ item.projectId } value={ item.projectId }>{ item.name }</option>) }
             </select>
           </article>
           <article className="newtask__input-box newtask__input-box_m">
-            <label htmlFor="" className="newtask__label">Проект</label>
+            <label htmlFor="" className="newtask__label">Статус задачи</label>
             <select
               { ...register('status') }
               id="employmentStatus-field"
               className="newtask__input newtask__input_select"
+              value={ statusTask }
+              onChange={ handleStatusChange }
             >
               { status.map((item) => <option key={ item.value } value={ item.value }>{ item.text }</option>) }
             </select>
@@ -199,7 +234,7 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
           </article>
         </div>
         <div className="newtask__buttons">
-          <button type="submit" className="newtask__button newtask__button_edit">Редактировать</button>
+          <button type="submit" className="newtask__button newtask__button_edit">Сохранить</button>
           <button type="button" className="newtask__button" onClick={ (() => { setIsEditing(false); }) }>Назад</button>
           <button type="button" className="newtask__button newtask__button_delete" onClick={ onDeleteTask }>Удалить</button>
         </div>

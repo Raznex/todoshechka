@@ -7,11 +7,13 @@ import { IRegister } from '../../common/assets/constants/interface';
 import { OpenPage, PasswordEye, PasswordEyeOpen } from '../../common/assets/icon/moduleIcon';
 import './_Register.scss';
 import '../../layout/Style/Input/_Input.scss';
+import { registerUser } from '../../utils/Api/MainApi';
 
 
 const Register = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isVisibleRep, setIsVisibleRep] = useState(true);
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
   const {
     register,
@@ -20,12 +22,12 @@ const Register = () => {
   } = useForm<IRegister>({ mode: 'onBlur' });
 
   const onSubmit = (data: IRegister) => {
-    const { passwordRegister, passwordRepeat } = data;
-    if (passwordRegister === passwordRepeat) {
-      console.log(data);
+    const { password, passwordRepeat } = data;
+    if (password === passwordRepeat) {
+      registerUser(data);
       navigate('/login', { replace: true });
     } else {
-      alert('пароли не совпадают');
+      setPasswordError('Пароли не совпадают');
     }
   };
 
@@ -46,7 +48,7 @@ const Register = () => {
                   <span className="input__lable-span">*</span>
                 </label>
                 <input
-                  { ...register('loginRegister', {
+                  { ...register('userName', {
                     required: 'Введите имя пользователя',
                     pattern: {
                       value: /^(?=.{2,40}$)[a-zA-Zа-яА-ЯёЁ]+(?: [a-zA-Zа-яА-ЯёЁ]+)*$/i,
@@ -56,12 +58,12 @@ const Register = () => {
                   type="text"
                   id="loginRegister"
                   placeholder="Ваше имя"
-                  className={ errors.loginRegister ? 'input__input input__input_error' : 'input__input' }
+                  className={ errors.userName ? 'input__input input__input_error' : 'input__input' }
                 />
               </div>
               { errors !== null && (
                 <span className="input__span">
-                  { errors.loginRegister?.message }
+                  { errors.userName?.message }
                 </span>
               ) }
             </article>
@@ -71,7 +73,7 @@ const Register = () => {
                   <span className="input__lable-span">*</span>
                 </label>
                 <input
-                  { ...register('emailRegister', {
+                  { ...register('email', {
                     required: 'Введите адрес электронной почты',
                     pattern: {
                       value: /^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/i,
@@ -81,12 +83,12 @@ const Register = () => {
                   type="email"
                   id="emailRegister"
                   placeholder="email@email.com"
-                  className={ errors.emailRegister ? 'input__input input__input_error' : 'input__input' }
+                  className={ errors.email ? 'input__input input__input_error' : 'input__input' }
                 />
               </div>
               { errors !== null && (
                 <span className="input__span">
-                  { errors.emailRegister?.message }
+                  { errors.email?.message }
                 </span>
               ) }
             </article>
@@ -97,24 +99,29 @@ const Register = () => {
                     <span className="input__lable-span">*</span>
                   </label>
                   <input
-                    { ...register('passwordRegister', {
+                    { ...register('password', {
                       required: 'Введите пароль',
                       pattern: {
-                        value: /^.{8,}$/,
+                        value: /^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/,
                         message: 'Пароль должен содержать не менее 8 символов',
                       },
                     }) }
                     type={ isVisible ? 'password' : 'text' }
                     id="passwordRegister"
                     placeholder="Пароль"
-                    className={ errors.passwordRegister ? 'input__input input__input_error' : 'input__input' }
+                    className={ errors.password ? 'input__input input__input_error' : 'input__input' }
                   />
                 </div>
                 { errors !== null && (
                   <span className="input__span">
-                    { errors.passwordRegister?.message }
+                    { errors.password?.message }
                   </span>
                 ) }
+                { passwordError !== '' ? (
+                  <span className="input__span">
+                    { passwordError }
+                  </span>
+                ) : '' }
               </article>
               <PasswordEye
                 className={ isVisible ? 'register__password-eye' : 'register__password-eye_hidden' }
@@ -150,6 +157,11 @@ const Register = () => {
                     { errors.passwordRepeat?.message }
                   </span>
                 ) }
+                { passwordError !== '' ? (
+                  <span className="input__span">
+                    { passwordError }
+                  </span>
+                ) : '' }
               </article>
               <PasswordEye
                 className={ isVisibleRep ? 'register__password-eye' : 'register__password-eye_hidden' }

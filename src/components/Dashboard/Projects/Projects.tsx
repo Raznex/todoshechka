@@ -10,7 +10,6 @@ interface ProjectProps {
 
 const Projects: React.FC <ProjectProps> = ({ project }) => (
   <li className="projects">
-    <img src="#" alt="Лого" className="projects__image" />
     <div className="projects__container">
       <p className="projects__name">{ project.name }</p>
       <p className="projects__task">{ project.quantity } задач</p>

@@ -4,6 +4,13 @@ export interface ILogin {
 }
 
 export interface IRegister {
+  userName: string;
+  email: string;
+  password: string;
+  passwordRepeat: string;
+}
+
+export interface IRegister {
   loginRegister: string;
   emailRegister: string;
   passwordRegister: string;

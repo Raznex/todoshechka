@@ -39,7 +39,7 @@ const Menu: React.FC<IMenuProps> = ({ loggedIn, setLoggedIn, user }) => {
           <li><a href="/" className={ `menu__link ${location.pathname === '/' ? 'menu__link_active' : ''}` }>Дашборд</a></li>
           <li><a href="/tasks" className={ `menu__link ${location.pathname === '/tasks' || location.pathname === '/newtask' ? 'menu__link_active' : ''}` }>Задачи</a></li>
           <li><a href="/projects" className={ `menu__link ${location.pathname === '/projects' || location.pathname === '/newproject' ? 'menu__link_active' : ''}` }>Проекты</a></li>
-          <li><a href="https://t.me/Just_For_Junior_Support_bot" target="_blank" rel="noreferrer" className="menu__link"><img src={ telegram } alt="telegram" className="menu__telegram" /> Техническая поддержка</a></li>
+          <li><a href="https://t.me/Neo_Innovators_Task_Tracker_bot" target="_blank" rel="noreferrer" className="menu__link"><img src={ telegram } alt="telegram" className="menu__telegram" /> Техническая поддержка</a></li>
         </ul>
         <button type="button" className={ `${!loggedIn ? 'menu__button-login' : 'menu__button-login_hidden'}` } onClick={ (() => navigate('/login', { replace: true })) }>Авторизоваться</button>
         <div className={ `menu__profile-box ${loggedIn ? '' : 'menu__profile-box_hidden'}` }>

@@ -1,7 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 
-import { IAddONProject, IEditTask, ILogin, INewProject, INewTask } from '../../common/assets/constants/interface';
+import {
+  IAddONProject,
+  IEditTask,
+  ILogin,
+  INewProject,
+  INewTask,
+  IRegister,
+} from '../../common/assets/constants/interface';
 
 
 const baseURL = 'https://pre-hack-production.up.railway.app';
@@ -59,6 +66,14 @@ export const autorization = async (body: ILogin) => {
   try {
     const res = await axios.post(`${baseURL}/authentication`, body);
     localStorage.setItem('jwt', res.data.token);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const registerUser = async (body: IRegister) => {
+  try {
+    const res = await axios.post(`${baseURL}/registration`, body);
   } catch (err) {
     throw err;
   }

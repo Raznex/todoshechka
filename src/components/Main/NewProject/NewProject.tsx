@@ -34,7 +34,7 @@ const NewProject: React.FC<INewProjectProps> = ({ loggedIn }) => {
       onSubmit={ handleSubmit(onSubmit) }
     >
       <div className="newproject__checkboxs">
-        <h3 className="newproject__title">Создание задачи</h3>
+        <h3 className="newproject__title">Создание проекта</h3>
       </div>
       <div className="newproject__inputs">
         <div className="newproject__inputs_up">
