@@ -58,7 +58,7 @@ const Project: React.FC<IProjectProps> = ({ project }) => {
             <ProjectCard
               key={ id }
               project={ project }
-              isActive={ thisProject?.name === project.name }
+              isActive={ thisProject?.projectId === project.projectId }
               onProjectClick={ handleTProjectClick }
             />
           )) }
