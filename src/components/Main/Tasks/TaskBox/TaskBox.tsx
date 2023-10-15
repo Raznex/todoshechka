@@ -10,8 +10,7 @@ interface ITaskBox {
 
 const TaskBox: React.FC<ITaskBox> = ({ task }) => (
   <>
-    <p className="task__text">Разнообразный и богатый опыт говорит нам, что
-      высокое качество позиционных исследований однозначно фиксирует.
+    <p className="task__text"> { task.description }
     </p>
     <div className="task__box">
       <div className="task__string">
