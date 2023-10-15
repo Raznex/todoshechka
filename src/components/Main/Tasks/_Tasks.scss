@@ -84,7 +84,8 @@
   }
 
   &__title {
-    width: 330px;
+    width: 280px;
+    flex-shrink: 0;
     color: #26282C;
     font-size: 16px;
     font-style: normal;
@@ -107,6 +108,9 @@
   }
 
   &__priority {
+    align-items: center;
+    text-align: center;
+    flex-shrink: 0;
     width: 50px;
     color: #95989C;
     font-size: 10px;
@@ -114,7 +118,6 @@
     font-style: normal;
     text-align: center;
     font-weight: 400;
-    line-height: 12px;
     background: #FFF1CC;
 
     &_n {
@@ -135,6 +138,8 @@
   }
 
   &__deadlines {
+    flex-shrink: 0;
+    width: 130px;
     color: #26282C;
     font-family: Inter;
     font-size: 10px;
@@ -148,6 +153,7 @@
     }
   }
   &__arrow {
+    flex-shrink: 0;
     width: 20px;
     height: 20px;
     margin: 0 16px;
