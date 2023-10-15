@@ -16,11 +16,10 @@ import { status } from '../../../../common/assets/constants/constants';
 interface IEditTaskProps {
   thisTask: ITask | null;
   project: IProject[];
-  user: IUser | null;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEditing }) => {
+const EditTask: React.FC<IEditTaskProps> = ({ project, thisTask, setIsEditing }) => {
   const location = useLocation();
   const {
     register,
@@ -35,7 +34,7 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
   const [dataFinish, setDataFinish] = useState(thisTask?.dataFinish || '');
   const [projectId, setProjectId] = useState(thisTask?.project.projectId || '');
   const [statusTask, setStatusTask] = useState(thisTask?.statusHistories[thisTask.statusHistories.length - 1].status || '');
-
+  // const [userEmail, setUserEmail] = useState(thisTask?.user.email || '');
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -54,6 +53,9 @@ const EditTask: React.FC<IEditTaskProps> = ({ project, user, thisTask, setIsEdit
   const handleDataFinishChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDataFinish(event.target.value);
   };
+  // const handleUserChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setUserEmail(event.target.value);
+  // };
 
   useEffect(() => {
     if (thisTask) {

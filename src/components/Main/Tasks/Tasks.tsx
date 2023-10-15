@@ -78,7 +78,7 @@ const Tasks: React.FC<ITaskProps> = ({ tasks, project, user }) => {
         </div>
       </div>
     )
-      : <EditTask thisTask={ thisTask } project={ project } user={ user } setIsEditing={ setIsEditing } /> }
+      : <EditTask thisTask={ thisTask } project={ project } setIsEditing={ setIsEditing } /> }
 
     </>
   );
